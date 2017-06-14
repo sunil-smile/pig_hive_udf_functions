@@ -1,0 +1,14 @@
+com\simplyanalytics\pigapp\customloader\CustomLoaderWithSchema.class
+com\simplyanalytics\pigapp\md5\Md5Hash.class
+com\simplyanalytics\pigapp\md5\Md5Hashing.class
+com\simplyanalytics\pigapp\customloader\CustomLoaderOnlySchema.class
+com\simplyanalytics\pigapp\customloader\Sample.class
+com\simplyanalytics\pigapp\utils\PigAppUtil.class
+com\simplyanalytics\hiveapp\udf\MaxDate$UhgDateMaxEvaluator.class
+com\simplyanalytics\hiveapp\udf\DateCompare.class
+com\simplyanalytics\pigapp\md5\SampleApp.class
+com\simplyanalytics\hiveapp\udf\MaxDate.class
+com\simplyanalytics\pigapp\customloader\MockRecordReader.class
+com\simplyanalytics\hiveapp\udf\CompareTimeStamp.class
+com\simplyanalytics\hiveapp\udf\MaxTimeStamp.class
+com\simplyanalytics\hiveapp\udf\MaxTimeStamp$MaxTimeStampEvaluator.class

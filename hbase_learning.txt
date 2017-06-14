@@ -1,0 +1,40 @@
+HBase handles basically two kinds of file types: one is used for the write-ahead log and the other for the actual data storage.
+
+
+
+The HMaster in the HBase is responsible for
+
+Performing Administration
+Managing and Monitoring the Cluster
+Assigning Regions to the Region Servers
+Controlling the Load Balancing and Failover
+
+
+On the other hand, the HRegionServer perform the following work
+
+Hosting and managing Regions
+Splitting the Regions automatically
+Handling the read/write requests
+Communicating with the Clients directly
+
+
+READ
+-----
+
+1)a new client contacts the ZooKeeper ensemble(a separate cluster of ZooKeeper nodes) first when trying to access a particular row.
+2)It does so by retrieving the server name (i.e., hostname) that hosts the -ROOT- region from ZooKeeper
+3)With this information it can query that region server to get the server name that hosts the .META. table region containing the row key in question.
+4)query the reported .META. server and retrieve the server name that has the region containing the row key the client is looking for
+5)has been told in what region the row resides, it caches this information as well and contacts the HRegionServer hosting that region directly.
+6)over time, the client has a pretty complete picture of where to get rows without needing to query the .META. server again
+
+
+WRITE
+-----
+1)write the data to the writeahead log (the WAL) in HRegion Server . The WAL is a standard Hadoop SequenceFile and it stores HLogKey instances
+2)Once the data is written to the WAL, it is placed in the MemStore. 
+3)At the same time, it is checked to see if the MemStore is full and, if so, a flush to disk is requested. The request is served by a separate thread in the HRegionServer, which writes the data to a new HFile located in HDFS. 
+4)It also saves the last written sequence number so that the system knows what was persisted so far.
+
+
+ If your application has a variable schema where each row is slightly different, then you should look at HBase
